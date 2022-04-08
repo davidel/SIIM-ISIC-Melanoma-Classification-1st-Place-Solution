@@ -42,7 +42,7 @@ def parse_args():
     parser.add_argument('--CUDA_VISIBLE_DEVICES', type=str, default='0')
     parser.add_argument('--fold', type=str, default='0,1,2,3,4')
     parser.add_argument('--n-meta-dim', type=str, default='512,128')
-    parser.add_argument('--from_scratch', action='store-true')
+    parser.add_argument('--from_scratch', action='store_true')
 
     args, _ = parser.parse_known_args()
     return args
