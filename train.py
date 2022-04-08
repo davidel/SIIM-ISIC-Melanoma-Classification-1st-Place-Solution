@@ -218,11 +218,11 @@ def run(fold, df, meta_features, n_meta_features, transforms_train, transforms_v
         scheduler_warmup.step()    
         if epoch==2: scheduler_warmup.step() # bug workaround   
             
-        if auc > auc_max:
+        if auc > auc_max or not os.path.exists(model_file):
             print('auc_max ({:.6f} --> {:.6f}). Saving model ...'.format(auc_max, auc))
             torch.save(model.state_dict(), model_file)
             auc_max = auc
-        if auc_20 > auc_20_max:
+        if auc_20 > auc_20_max or not os.path.exists(model_file2):
             print('auc_20_max ({:.6f} --> {:.6f}). Saving model ...'.format(auc_20_max, auc_20))
             torch.save(model.state_dict(), model_file2)
             auc_20_max = auc_20
