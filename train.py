@@ -42,6 +42,7 @@ def parse_args():
     parser.add_argument('--CUDA_VISIBLE_DEVICES', type=str, default='0')
     parser.add_argument('--fold', type=str, default='0,1,2,3,4')
     parser.add_argument('--n-meta-dim', type=str, default='512,128')
+    parser.add_argument('--from_scratch', action='store-true')
 
     args, _ = parser.parse_known_args()
     return args
@@ -179,7 +180,7 @@ def run(fold, df, meta_features, n_meta_features, transforms_train, transforms_v
         n_meta_features=n_meta_features,
         n_meta_dim=[int(nd) for nd in args.n_meta_dim.split(',')],
         out_dim=args.out_dim,
-        pretrained=True
+        pretrained=not args.from_scratch
     )
     if DP:
         model = apex.parallel.convert_syncbn_model(model)
